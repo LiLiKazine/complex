@@ -10,7 +10,7 @@ var http = require('http');
 var TestMySql = require('../services/mysql')
 
 var test = new TestMySql()
-my.run()
+test.run()
 
 
 /**
