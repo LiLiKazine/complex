@@ -1,6 +1,7 @@
 const router = require('koa-router')()
 const fs = require('fs')
 const path = require('path')
+const send = require('koa-send')
 
 const rootPath = path.join(__dirname, '../../')
 
@@ -10,9 +11,9 @@ router.get('/files', async (ctx, next) => {
         // let files = await fs.readdir(filePath)
         let files = fs.readdirSync(filePath)
         let avaliable = []
-        if(files&&files.length){
+        if (files && files.length) {
             files.array.forEach(file => {
-                if(fs.statSync(path.join(filePath, file)).isFile()){
+                if (fs.statSync(path.join(filePath, file)).isFile()) {
                     avaliable.push(file)
                 }
             })
@@ -24,8 +25,9 @@ router.get('/files', async (ctx, next) => {
 
 })
 
-router.get('/download/:file', async (ctx, next) => {
-
+router.get('/download/:file', async (ctx) => {
+    let name = ctx.params.file
+    await send(ctx, name, { root: rootPath + '/resource' })
 })
 
 module.exports = router
