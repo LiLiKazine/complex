@@ -1,0 +1,18 @@
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        title Files
+    body
+        h1 Files
+        ul
+            - var keys = Object.keys(source)
+            - keys.splice(keys.indexOf("files"), 1)
+            - for (var idx = 0; idx < keys.length; idx++) 
+                li #{keys[idx]}
+            - var files = source.files
+            - for (var idx = 0; idx < source.files.length; idx++) 
+                li #{files[idx]}
+            
+            
