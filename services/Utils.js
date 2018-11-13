@@ -3,8 +3,6 @@ const path = require('path')
 
 class Utils {
 
-
-
     createDir(dirPath) {
         let dirs = []
         while (!fs.existsSync(dirPath)) {
