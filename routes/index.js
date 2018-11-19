@@ -1,4 +1,5 @@
 const router = require('koa-router')()
+const dbop = require('../services/mysql')
 
 router.get('/', async (ctx, next) => {
   await ctx.render('index', {

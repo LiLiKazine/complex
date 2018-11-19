@@ -1,33 +1,34 @@
+const mysql = require('mysql')
+const config = require('../config/mysql')
 
-class TestMySql {
+let pool = mysql.createPool({
+    host: config.host,
+    user: config.user,
+    password: config.password,
+    database: config.database,
+    port: config.port
+})
 
-  run() {
-      let mysql = require('mysql')
-      let connection = mysql.createConnection({
-          host: '148.70.109.94',
-          user: '*',
-          password: '*',
-          database: '*'
-      })
+let operation = {
+    query: (sql, vals)=> {
+        return new Promise ((resolve, reject)=> {
+            pool.getConnection((err, con)=>{
+                if(err) {
+                    reject(err)
+                } else {
+                    con.query(sql, vals, (qerr, rows)=> {
+                        if (qerr) {
+                            reject(qerr)
+                        } else {
+                            resolve(rows)
+                        }
+                        con.release()
+                    })
+                }
 
-      connection.connect()
-
-
-      var sql = 'SELECT * FROM users';
-
-      connection.query(sql, function (err, result) {
-          if (err) {
-              console.log('[SELECT ERROR] - ', err.message);
-              return;
-          }
-
-          console.log('--------------------------SELECT----------------------------');
-          console.log(result);
-          console.log('------------------------------------------------------------\n\n');
-      });
-
-      connection.end();
-  }
+            })
+        })
+    }
 }
 
-module.exports = TestMySql
+module.exports = operation
