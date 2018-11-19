@@ -1,7 +1,7 @@
 const router = require('koa-router')()
-const dbop = require('../services/mysql')
 
 router.get('/', async (ctx, next) => {
+  console.log(res)
   await ctx.render('index', {
     title: 'Hello Koa 2!'
   })
