@@ -13,6 +13,7 @@ const index = require('./routes/index')
 const users = require('./routes/users')
 const download = require('./routes/download')
 const syncBooks = require('./routes/lindle/sync-books')
+const nutStore = require('./routes/nut-store/nut-store') 
 
 // error handler
 onerror(app)
@@ -42,6 +43,7 @@ app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
 app.use(download.routes(), download.allowedMethods())
 app.use(syncBooks.routes(), syncBooks.allowedMethods())
+app.use(nutStore.routes(), nutStore.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
