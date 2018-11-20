@@ -47,15 +47,14 @@ router.post('/link', async (ctx, next) => {
 router.post('op', async (ctx, next) => {
     try{
         let source = ctx.request.body.source
+        let target = ctx.request.body.target
         let op = ctx.request.body.op
         let res
         switch (op) {
             case 'copy':
-            let target = ctx.request.body.target
             res = nut.copy(source, target)
             break
             case 'move':
-            let target = ctx.request.body.target
             res = nut.move(source, target)
             break
             case 'mkdir':
